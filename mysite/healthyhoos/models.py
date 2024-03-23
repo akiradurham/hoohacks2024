@@ -13,8 +13,8 @@ class Group(models.Model):
     name = models.CharField(max_length=100)
     # Description of the task.
     description = models.TextField()
-    is_public = models.BooleanField()
-    likes = models.IntegerField()
+    is_public = models.BooleanField(default=False)
+    likes = models.IntegerField(default=0)
     # calendar id
     calendarID = models.CharField(max_length=100)
     # Tasks is a many-to-many field assuming a group can have multiple tasks.
