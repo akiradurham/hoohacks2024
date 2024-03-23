@@ -11,8 +11,8 @@ class User(models.Model):
 class Group(models.Model):
     # Name of the group.
     name = models.CharField(max_length=100)
-    # Description of the task.
-    description = models.TextField()
+    # Description of the task. lets go PORN!!!!!!!!! 
+    description = models.TextField() 
     is_public = models.BooleanField(default=False)
     likes = models.IntegerField(default=0)
     # calendar id
