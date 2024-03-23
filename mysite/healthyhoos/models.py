@@ -17,6 +17,7 @@ class Group(models.Model):
     calendarID = models.CharField(max_length=100)
     # Tasks is a many-to-many field assuming a group can have multiple tasks.
     tasks = models.ManyToManyField('Task', related_name='groups')
+    admin_users = models.ManyToManyField(User, related_name='admin_groups')
 
 # Task model
 class Task(models.Model):
