@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 
 def indexview(request): 
-    return render(request, 'healthyhoos/index.html')
+    return render(request, 'healthyhoos/base.html')
