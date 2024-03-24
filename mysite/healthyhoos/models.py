@@ -11,12 +11,15 @@ class User(models.Model):
 class Group(models.Model):
     # Name of the group.
     name = models.CharField(max_length=100)
-    # Description of the task.
-    description = models.TextField()
+    # Description of the task. lets go PORN!!!!!!!!! 
+    description = models.TextField() 
+    is_public = models.BooleanField(default=False)
+    likes = models.IntegerField(default=0)
     # calendar id
     calendarID = models.CharField(max_length=100)
     # Tasks is a many-to-many field assuming a group can have multiple tasks.
     tasks = models.ManyToManyField('Task', related_name='groups')
+    admin_users = models.ManyToManyField(User, related_name='admin_groups')
 
 # Task model
 class Task(models.Model):

@@ -1,0 +1,38 @@
+{% extends 'healthyhoos/base.html' %}
+
+<h1>Physical Health Groups</h1>
+<div style="display: flex; justify-content: space-between;">
+    <div style="width: 45%;">
+        <h2>Public Groups</h2>
+        {% for group in physical_groups %}
+            {% if group.is_public %}
+                <div style="border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                    <h3>{{ group.name }}</h3>
+                    <p>Description: {{ group.description }}</p>
+                    <!-- Add more information here -->
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div style="width: 45%;">
+        <h2>Private Groups</h2>
+        {% for group in physical_groups %}
+            {% if not group.is_public %}
+                <div style="border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                    <h3>{{ group.name }}</h3>
+                    <p>Description: {{ group.description }}</p>
+                    <!-- Add more information here -->
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<form method="post" action="{% url 'healthyhoos:physical-health' %}">
+    {% csrf_token %}
+    <label for="group_name">Add Group Name:</label>
+    <input type="text" id="group_name" name="group_name" required> 
+    <input type="checkbox" id="is_admin" name="is_admin">
+    <label for="is_admin">Is Admin</label><br><br>
+    <button type="submit">Submit POST Request</button>
+</form>

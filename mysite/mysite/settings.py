@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-# https://medium.com/@infowithkiiru/django-user-registration-with-google-67524cce5ab7
 
 INSTALLED_APPS = [
     "healthyhoos",
@@ -46,7 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -111,7 +110,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -129,16 +131,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend'
-]
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -147,19 +139,17 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
-        },
-        'APP': {
-            'client_id': '119931823283-5/ofb4p36tu81q5mu02rlf5llhpb94k6b.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
         }
     }
 }
 
-SITE_ID = 2
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-LOGIN_REDIRECT_URL = '/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SITE_ID = 3
+
+LOGIN_REDIRECT_URL = '/healthyhoos/home'
 LOGOUT_REDIRECT_URL = '/'
-
-# ClientID - 119931823283-5/ofb4p36tu81q5mu02rlf5llhpb94k6b.apps.googleusercontent.com
-# ClientSecret - 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
