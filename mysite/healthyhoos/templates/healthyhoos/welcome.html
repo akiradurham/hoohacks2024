@@ -7,7 +7,7 @@ https://getbootstrap.com/docs/4.1/layout/grid/
 https://www.jsdelivr.com/package/npm/bootstrap?version=5.1.3
 
 -->
-{% load socialaccount %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,16 +30,9 @@ https://www.jsdelivr.com/package/npm/bootstrap?version=5.1.3
             </div>
             <div>
                 <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <span class="navbar-text">Logged in as {{user.username}} | </span>
                     <li class="nav-item">
-                      <a class="nav-link" href="/logout">Logout</a>
+                        <a class="nav-link" href="/healthyhoos"> Login </a>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="login/">Login</a>
-                    </li>
-                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -56,13 +49,6 @@ https://www.jsdelivr.com/package/npm/bootstrap?version=5.1.3
            Continue (replace with login check)
         </a>
     </button>
-
-    <button class="btn btn-success">
-          <a href="{% provider_login_url 'google' %}?next=/healthyhoos/home" >
-             Google
-          </a>
-    </button>
-
     <footer class="bg-dark text-center py-3 fixed-bottom">
         <div class="container">
             <p class="mb-0 text-secondary">
