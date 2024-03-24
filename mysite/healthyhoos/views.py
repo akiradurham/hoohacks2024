@@ -21,6 +21,9 @@ def home_view(request):
     return render(request, 'healthyhoos/home.html')
 
 
+def profile_view(request):
+    return render(request, 'healthyhoos/profile.html')
+
 
 
 def nutrition_view(request):  
