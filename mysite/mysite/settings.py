@@ -152,4 +152,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL = '/healthyhoos/home'
-LOGOUT_REDIRECT_URL = '/healthyhoos/welcome'
+LOGOUT_REDIRECT_URL = '/healthyhoos'
