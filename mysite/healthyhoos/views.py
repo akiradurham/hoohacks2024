@@ -7,6 +7,10 @@ def welcome_view(request):
     return render(request, 'healthyhoos/welcome.html')
 
 
+def login_view(request):
+    return render(request, 'healthyhoos/login.html')
+
+
 def home_view(request):
     return render(request, 'healthyhoos/home.html')
 

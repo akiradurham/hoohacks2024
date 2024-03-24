@@ -31,9 +31,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# https://medium.com/@infowithkiiru/django-user-registration-with-google-67524cce5ab7
 
 INSTALLED_APPS = [
-    "healthyhoos.apps.HealthyhoosConfig",
+    "healthyhoos",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -126,3 +133,33 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'APP': {
+            'client_id': '119931823283-5/ofb4p36tu81q5mu02rlf5llhpb94k6b.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
+
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# ClientID - 119931823283-5/ofb4p36tu81q5mu02rlf5llhpb94k6b.apps.googleusercontent.com
+# ClientSecret - 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
