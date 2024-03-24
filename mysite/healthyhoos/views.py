@@ -6,7 +6,8 @@ from .models import Group, Task
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
-
+# pip install google-auth-oauthlib
+# pip install google-api-python-client
 from django.http import HttpResponse
 from django.utils import timezone
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -16,6 +17,7 @@ import os.path
 import pickle
 
 SCOPES = ['https://www.googleapis.com/auth/calendar']
+
 
 def welcome_view(request):
     return render(request, 'healthyhoos/welcome.html')
