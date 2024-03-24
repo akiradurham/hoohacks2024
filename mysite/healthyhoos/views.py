@@ -8,6 +8,13 @@ from django.shortcuts import redirect
 
 from django.http import HttpResponse
 from django.utils import timezone
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from google.auth.transport.requests import Request
+import os.path
+import pickle
+
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def welcome_view(request):
     return render(request, 'healthyhoos/welcome.html')
@@ -45,6 +52,7 @@ def nutrition_view(request):
         if is_public:
             new_group.admin_users.add(request.user)
         # Save the new group
+        new_group.calendarID = createCalendar(group_name)
         new_group.save()
         
         # Redirect to a different URL after POST
@@ -79,6 +87,7 @@ def physical_view(request):
         if is_public:
             new_group.admin_users.add(request.user)
         
+        new_group.calendarID = createCalendar(group_name)
         # Save the new group
         new_group.save()
         
@@ -112,6 +121,7 @@ def mental_view(request):
         if is_public:
             new_group.admin_users.add(request.user)
         
+        new_group.calendarID = createCalendar(group_name)
         # Save the new group
         new_group.save()
         
@@ -127,6 +137,9 @@ def mental_view(request):
 
 def about_view(request):
     return render(request, 'healthyhoos/about.html')
+
+def calendar_view(request):
+    return render(request, 'healthyhoos/calendar.html')
 
 def nutrition_view_group(request, nutrition_id):
     group = Group.objects.get(id=nutrition_id)
@@ -169,3 +182,33 @@ def mental_view_group(request, mental_health_id):
             tasks = group.tasks.all().order_by('id')
 
     return render(request, 'healthyhoos/grouptaskdisplay.html', {'group': group, 'tasks': tasks})
+
+
+def createCalendar(name):
+    creds = None
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'secret.json', SCOPES)  # Use the downloaded JSON file
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+    service = build('calendar', 'v3', credentials=creds)
+
+    # Create a new calendar
+    calendar = {
+        'summary': name,  # Your new calendar name
+        'timeZone': 'America/New_York'  # Your time zone
+    }
+
+    created_calendar = service.calendars().insert(body=calendar).execute()
+    print('Created Calendar ID: %s' % created_calendar['id'])
+    return created_calendar['id']

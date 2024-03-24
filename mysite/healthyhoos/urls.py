@@ -15,7 +15,8 @@ urlpatterns = [
     path("physical-health/<int:physical_health_id>/", views.physical_view_group, name="physical-health_group"),
     path("mental-health/", views.mental_view, name="mental-health"),
     path("mental-health/<int:mental_health_id>/", views.mental_view_group, name="mental-health_group"),
-  
+    path("calendar/", views.calendar_view, name="calendar"),
+
     path("about/", views.about_view, name="about"),
     path("profile/", views.profile_view, name="profile"),
     path('logout/', LogoutView.as_view(), name='logout'),
