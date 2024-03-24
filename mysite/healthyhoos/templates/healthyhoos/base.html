@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!DOCTYPE html>
 <!--
 https://getbootstrap.com/docs/4.0/components/navbar/
@@ -21,27 +22,40 @@ https://www.jsdelivr.com/package/npm/bootstrap?version=5.1.3
         <div class="container-fluid">
             <div>
                 <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="/healthyhoos"> Home </a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/healthyhoos"> About Us </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <div>
                 <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="/healthyhoos"> Logout </a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/{% provider_login_url 'google' %}"> Login </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
-    {%block content%}
-    
-    {%endblock%}
-    <footer class="bg-dark text-center py-3 fixed-bottom">
+    {% block content %}
+    <!-- filled with other pages info -->
+    {% endblock %}
+
+    <footer class="text-center py-3 fixed-bottom">
         <div class="container">
-            <p class="mb-0 text-secondary">
+            <p class="mb-0 text-secondary" style="color: black; font-size: smaller;">
                 &copy; 2024 Hackathon - Akira, Andrew, Rui
             </p>
         </div>
