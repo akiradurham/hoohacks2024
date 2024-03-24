@@ -32,8 +32,7 @@ def profile_view(request):
     return render(request, 'healthyhoos/profile.html')
 
 
-
-def nutrition_view(request):  
+def nutrition_view(request):
     if request.method == 'POST':
         # If it's a POST request, process the form data
         group_name = request.POST.get('group_name')

@@ -1,24 +1,30 @@
 {%extends 'healthyhoos/base.html'%}
-<div class="container text-center" style="height: 80vh; width: 90vw;">
-    <h1>About The Developers</h1>
-    <p>
-        Welcome to our group's personal information page. We are a team of passionate
-        individuals focused on creating interesting projects that we believe will succeed.
-    </p>
-    <p>
-        This project was built through Django, Python, Bootstrap, HTML, and CSS while utilizing
-        Google's login and calendar API's to provide smooth Google suite integration!
-    </p>
-    <p>
-        We are all University of Virginia students with a major in Computer Science, exploring the
-        11th hackathon hosted by HooHacks. Creating an engaging web application and building full stack
-        development skills are some of the key reasons we decided to participate in this year's hackathon,
-        as well as the opportunity to meet so many other talented individuals
-    </p>
-    <p> - Meet the team that made this happen - </p>
-    <ul>
-        <li>Rui Zhang</li>
-        <li>Drew Csontos</li>
-        <li>Akira Durham</li>
-    </ul>
+{% block content %}
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 80vh; margin-bottom: 10vh; overflow-y: auto;">
+    <div class="container text-center" style="height: 80vh; width:75vw; padding-top: 2vh;">
+        <h1>About The Developers</h1>
+        <p style="margin-bottom: 5vh;"></p>
+        <p style="margin-bottom: 5vh;">
+            Welcome to our group's personal information page. We are a team of passionate
+            individuals focused on creating interesting projects that we believe will succeed.
+            From spending 4 hours fixing a bug that had us all scratching our heads to knocking
+            out the main part of our app in that same amount of time brought us closer together
+            as friends and as professionals. Experiencing the stress of a deadline, the constant
+            pressure of competition, and the reward of presenting our final product, gave us
+            insights into our careers as well as improving our real-world skills.
+        </p>
+        <p style="margin-bottom: 5vh;">
+            This project was built through Django, Python, Bootstrap, HTML, and CSS while utilizing
+            Google's login and calendar API's to provide smooth Google suite integration!
+        </p>
+        <p style="margin-bottom: 5vh;">
+            We are all University of Virginia students with a major in Computer Science, exploring the
+            11th hackathon hosted by HooHacks. Creating an engaging web application and building full stack
+            development skills are some of the key reasons we decided to participate in this year's hackathon,
+            as well as the opportunity to meet so many other talented individuals
+        </p>
+        <p> - Meet the team that made this happen - </p>
+        <p>Rui Zhang - Drew Csontos - Akira Durham</p>
+    </div>
 </div>
+{% endblock %}
