@@ -7,11 +7,16 @@
         <h2>Public Groups</h2>
         {% for group in mental_groups %}
             {% if group.is_public %}
-                <div style="border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                    <h3>{{ group.name }}</h3>
-                    <p>Description: {{ group.description }}</p>
-                    <!-- Add more information here -->
-                </div>
+                <form action="/healthyhoos/mental-health/{{ group.id }}/" method="post">
+                    {% csrf_token %}
+                    <div style="border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                        <h3>{{ group.name }}</h3>
+                        <p>Description: {{ group.description }}</p>
+                        <p>Likes: {{ group.likes }}</p>
+                        <!-- Add more information here -->
+                        <button type="submit">Join Group</button>
+                    </div>
+                </form>
             {% endif %}
         {% endfor %}
     </div>
@@ -19,11 +24,15 @@
         <h2>Private Groups</h2>
         {% for group in mental_groups %}
             {% if not group.is_public %}
-                <div style="border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                    <h3>{{ group.name }}</h3>
-                    <p>Description: {{ group.description }}</p>
-                    <!-- Add more information here -->
-                </div>
+                <form action="/healthyhoos/mental-health/{{ group.id }}/" method="post">
+                    {% csrf_token %}
+                    <div style="border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                        <h3>{{ group.name }}</h3>
+                        <p>Description: {{ group.description }}</p>
+                        <!-- Add more information here -->
+                        <button type="submit">Join Group</button>
+                    </div>
+                </form>
             {% endif %}
         {% endfor %}
     </div>
@@ -35,7 +44,7 @@
     <input type="text" id="group_name" name="group_name" required> 
     <input type="checkbox" id="is_admin" name="is_admin">
     <label for="is_admin">Is Admin</label><br><br>
-    <button type="submit">Submit POST Request</button>
+    <button type="submit">Add Group</button>
 </form>
 
 {% endblock %}

@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -152,4 +151,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL = '/healthyhoos/home'
-LOGOUT_REDIRECT_URL = '/healthyhoos/welcome'
+LOGOUT_REDIRECT_URL = '/healthyhoos'

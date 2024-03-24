@@ -1,0 +1,35 @@
+{% extends 'healthyhoos/base.html' %}
+{% block content %}
+  <h1>{{ group.name }} Tasks</h1>
+  <div class="row">
+    {% for task in tasks %}
+      <div class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h2 class="card-title">{{ task.name }}</h2>
+            <p class="card-text">Category: {{ task.category_code }}</p>
+            <p class="card-text">Description: {{ task.description }}</p>
+            <p class="card-text">Time: {{ task.time }}</p>
+            <!-- Add more task information here as needed -->
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-4">
+    <h2>Add Task</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="task_name">Task Name:</label>
+        <input type="text" class="form-control" id="task_name" name="task_name" required>
+      </div>
+      <div class="form-group">
+        <label for="task_description">Task Description:</label>
+        <textarea class="form-control" id="task_description" name="task_description" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+{% endblock %}
