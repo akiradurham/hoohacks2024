@@ -6,8 +6,6 @@ from .models import Group
 from django.shortcuts import redirect
 
 
-
-
 def welcome_view(request):
     return render(request, 'healthyhoos/welcome.html')
 
@@ -16,10 +14,12 @@ def login_view(request):
     return render(request, 'healthyhoos/login.html')
 
 
+def profile_view(request):
+    return render(request, 'healthyhoos/profile.html')
+
+
 def home_view(request):
     return render(request, 'healthyhoos/home.html')
-
-
 
 
 def nutrition_view(request):  
@@ -51,9 +51,6 @@ def nutrition_view(request):
         return render(request, 'healthyhoos/nutrition.html', {'nutrition_groups': nutrition_groups})
 
 
-
-
-
 def physical_view(request):  
     if request.method == 'POST':
         # If it's a POST request, process the form data
@@ -81,7 +78,6 @@ def physical_view(request):
         # If it's not a POST request, just render the template with existing groups
         physical_groups = Group.objects.filter(description="physical-health")
         return render(request, 'healthyhoos/physical.html', {'physical_groups': physical_groups})
-
 
 
 def mental_view(request):  

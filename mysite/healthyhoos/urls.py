@@ -13,6 +13,7 @@ urlpatterns = [
     path("physical-health/", views.physical_view, name="physical-health"),
     path("mental-health/", views.mental_view, name="mental-health"),
     path("about/", views.about_view, name="about"),
+    path("profile/", views.profile_view, name="profile"),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('accounts/', include('allauth.urls')),
 ]
