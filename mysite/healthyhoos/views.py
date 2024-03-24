@@ -4,6 +4,7 @@ from django.shortcuts import render
 from .models import Group, Task
 
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 
 from django.http import HttpResponse
@@ -32,6 +33,7 @@ def profile_view(request):
     return render(request, 'healthyhoos/profile.html')
 
 
+@login_required
 def nutrition_view(request):
     if request.method == 'POST':
         # If it's a POST request, process the form data
@@ -64,9 +66,7 @@ def nutrition_view(request):
         return render(request, 'healthyhoos/nutrition.html', {'nutrition_groups': nutrition_groups})
 
 
-
-
-
+@login_required
 def physical_view(request):  
     if request.method == 'POST':
         # If it's a POST request, process the form data
@@ -100,7 +100,7 @@ def physical_view(request):
         return render(request, 'healthyhoos/physical.html', {'physical_groups': physical_groups})
 
 
-
+@login_required
 def mental_view(request):  
     if request.method == 'POST':
         # If it's a POST request, process the form data
@@ -137,9 +137,12 @@ def mental_view(request):
 def about_view(request):
     return render(request, 'healthyhoos/about.html')
 
+
 def calendar_view(request):
     return render(request, 'healthyhoos/calendar.html')
 
+
+@login_required
 def nutrition_view_group(request, nutrition_id):
     group = Group.objects.get(id=nutrition_id)
     tasks = group.tasks.all().order_by('id')
@@ -154,6 +157,8 @@ def nutrition_view_group(request, nutrition_id):
 
     return render(request, 'healthyhoos/grouptaskdisplay.html', {'group': group, 'tasks': tasks})
 
+
+@login_required
 def physical_view_group(request, physical_health_id):
     group = Group.objects.get(id=physical_health_id)
     tasks = group.tasks.all().order_by('id')
@@ -168,6 +173,8 @@ def physical_view_group(request, physical_health_id):
 
     return render(request, 'healthyhoos/grouptaskdisplay.html', {'group': group, 'tasks': tasks})
 
+
+@login_required
 def mental_view_group(request, mental_health_id):
     group = Group.objects.get(id=mental_health_id)
     tasks = group.tasks.all().order_by('id')
