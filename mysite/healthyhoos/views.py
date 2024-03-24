@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from .models import Group, Task
+from .models import User
 
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -52,8 +53,13 @@ def nutrition_view(request):
             is_public=is_public
         )
 
+        # Create a new User object using request.user
+        user_object = User.objects.create(name=request.user.username)
+        
+        # Add the user_object to admin_users
+        
         if is_public:
-            new_group.admin_users.add(request.user)
+            new_group.admin_users.add(user_object)
         # Save the new group
         new_group.calendarID = createCalendar(group_name)
         new_group.save()
@@ -85,8 +91,12 @@ def physical_view(request):
             is_public=is_public
         )
 
+        user_object = User.objects.create(name=request.user.username)
+        
+        # Add the user_object to admin_users
+        
         if is_public:
-            new_group.admin_users.add(request.user)
+            new_group.admin_users.add(user_object)
         
         new_group.calendarID = createCalendar(group_name)
         # Save the new group
@@ -119,8 +129,12 @@ def mental_view(request):
             is_public=is_public
         )
 
+        user_object = User.objects.create(name=request.user.username)
+        
+        # Add the user_object to admin_users
+        
         if is_public:
-            new_group.admin_users.add(request.user)
+            new_group.admin_users.add(user_object)
         
         new_group.calendarID = createCalendar(group_name)
         # Save the new group
