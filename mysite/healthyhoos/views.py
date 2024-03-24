@@ -1,12 +1,13 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Group
+from .models import Group, Task
 
 from django.shortcuts import redirect
 
 
-
+from django.http import HttpResponse
+from django.utils import timezone
 
 def welcome_view(request):
     return render(request, 'healthyhoos/welcome.html')
@@ -37,7 +38,9 @@ def nutrition_view(request):
             description="nutrition",  # Example description
             is_public=is_public
         )
-        
+
+        if is_public:
+            new_group.admin_users.add(request.user)
         # Save the new group
         new_group.save()
         
@@ -69,6 +72,9 @@ def physical_view(request):
             description="physical-health",  # Example description
             is_public=is_public
         )
+
+        if is_public:
+            new_group.admin_users.add(request.user)
         
         # Save the new group
         new_group.save()
@@ -99,6 +105,9 @@ def mental_view(request):
             description="mental-health",  # Example description
             is_public=is_public
         )
+
+        if is_public:
+            new_group.admin_users.add(request.user)
         
         # Save the new group
         new_group.save()
@@ -115,3 +124,45 @@ def mental_view(request):
 
 def about_view(request):
     return render(request, 'healthyhoos/about.html')
+
+def nutrition_view_group(request, nutrition_id):
+    group = Group.objects.get(id=nutrition_id)
+    tasks = group.tasks.all().order_by('id')
+
+    if request.method == 'POST':
+        task_name = request.POST.get('task_name')
+        task_description = request.POST.get('task_description')
+        if task_name and task_description:
+            new_task = Task.objects.create(name=task_name, description=task_description, time=timezone.now())
+            group.tasks.add(new_task)
+            tasks = group.tasks.all().order_by('id')
+
+    return render(request, 'healthyhoos/grouptaskdisplay.html', {'group': group, 'tasks': tasks})
+
+def physical_view_group(request, physical_health_id):
+    group = Group.objects.get(id=physical_health_id)
+    tasks = group.tasks.all().order_by('id')
+
+    if request.method == 'POST':
+        task_name = request.POST.get('task_name')
+        task_description = request.POST.get('task_description')
+        if task_name and task_description:
+            new_task = Task.objects.create(name=task_name, description=task_description, time=timezone.now())
+            group.tasks.add(new_task)
+            tasks = group.tasks.all().order_by('id')
+
+    return render(request, 'healthyhoos/grouptaskdisplay.html', {'group': group, 'tasks': tasks})
+
+def mental_view_group(request, mental_health_id):
+    group = Group.objects.get(id=mental_health_id)
+    tasks = group.tasks.all().order_by('id')
+
+    if request.method == 'POST':
+        task_name = request.POST.get('task_name')
+        task_description = request.POST.get('task_description')
+        if task_name and task_description:
+            new_task = Task.objects.create(name=task_name, description=task_description, time=timezone.now())
+            group.tasks.add(new_task)
+            tasks = group.tasks.all().order_by('id')
+
+    return render(request, 'healthyhoos/grouptaskdisplay.html', {'group': group, 'tasks': tasks})
